@@ -1,0 +1,21 @@
+{
+  "debug.javascript.suggestPrettyPrinting": true,
+  "debug.javascript.unmapMissingSources": true,
+
+  // TypeScript settings
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // File associations
+  "files.associations": {
+    "*.css": "css"
+  },
+
+  // Recommended extensions
+  "recommendations": [
+    "oven.bun-vscode",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss"
+  ]
+}

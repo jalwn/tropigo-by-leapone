@@ -1,0 +1,22 @@
+{
+    "name": "tropigo",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "dev": "concurrently -n \"api,ui\" -c \"cyan,magenta\" \"bun run dev:api\" \"bun run dev:ui\"",
+        "dev:api": "bun run --cwd apps/api dev",
+        "dev:ui": "bun run --cwd apps/ui dev",
+        "db:push": "bun run --cwd apps/api db:push",
+        "db:generate": "bun run --cwd apps/api db:generate",
+        "db:migrate": "bun run --cwd apps/api db:migrate",
+        "db:studio": "bun run --cwd apps/api db:studio",
+        "db:seed": "bun run --cwd apps/api db:seed"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1",
+        "typescript": "^5.9.3"
+    }
+}

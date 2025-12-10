@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug API (Bun)",
+      "type": "bun",
+      "request": "launch",
+      "program": "${workspaceFolder}/apps/api/src/index.ts",
+      "cwd": "${workspaceFolder}/apps/api",
+      "stopOnEntry": false,
+      "watchMode": true,
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "name": "Debug UI (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8070",
+      "webRoot": "${workspaceFolder}/apps/ui",
+      "sourceMaps": true,
+      "skipFiles": ["<node_internals>/**"],
+      "preLaunchTask": "Start UI Dev Server"
+    },
+    {
+      "name": "Attach to Bun API",
+      "type": "bun",
+      "request": "attach",
+      "stopOnEntry": false
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Full Stack",
+      "configurations": ["Debug API (Bun)", "Debug UI (Chrome)"],
+      "presentation": {
+        "hidden": false,
+        "group": "fullstack",
+        "order": 1
+      },
+      "stopAll": true
+    }
+  ]
+}
