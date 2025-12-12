@@ -151,7 +151,7 @@ export default function ExplorePage() {
           ))}
         </div>
 
-        {/* Discover Section */}
+        {/* Activites Section */}
         <div className="mt-5">
           <h2 className="text-2xl font-bold text-[#1a3a2e] mb-4">Discover</h2>
 

@@ -40,3 +40,18 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* Route path moving animation */
+@keyframes route-move {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -30;
+  }
+}
+
+.route-path-moving {
+  animation: route-move 1s linear infinite;
+}
+

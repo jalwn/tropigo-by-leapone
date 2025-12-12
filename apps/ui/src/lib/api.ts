@@ -163,3 +163,41 @@ export async function fetchLandmark(id: string, lang?: string): Promise<Landmark
   return data.data
 }
 
+export interface OSRMRouteResponse {
+  code: string
+  routes: Array<{
+    geometry: {
+      type: 'LineString'
+      coordinates: [number, number][] // [lng, lat] format
+    }
+    distance: number
+    duration: number
+  }>
+}
+
+export async function fetchOSRMRoute(
+  origin: { lat: number; lng: number },
+  destination: { lat: number; lng: number },
+  profile: 'driving' | 'walking' | 'cycling' = 'walking'
+): Promise<[number, number][]> {
+  // OSRM uses lng,lat format
+  const coordinates = `${origin.lng},${origin.lat};${destination.lng},${destination.lat}`
+  const url = `http://router.project-osrm.org/route/v1/${profile}/${coordinates}?overview=full&geometries=geojson`
+
+  const response = await fetch(url)
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch route from OSRM')
+  }
+
+  const data: OSRMRouteResponse = await response.json()
+
+  if (data.code !== 'Ok' || !data.routes || data.routes.length === 0) {
+    throw new Error('No route found')
+  }
+
+  // Convert GeoJSON coordinates [lng, lat] to Leaflet format [lat, lng]
+  const route = data.routes[0].geometry.coordinates
+  return route.map(([lng, lat]) => [lat, lng] as [number, number])
+}
+
