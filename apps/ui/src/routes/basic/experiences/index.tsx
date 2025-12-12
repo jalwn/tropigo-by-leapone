@@ -1,7 +1,7 @@
 // WITH PREFETCH - Data loads before component renders
 import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { experiencesQueryOptions } from '../../api/experiences'
+import { experiencesQueryOptions } from '../../../api/experiences'
 import { formatPrice } from '@tropigo/utils'
 
 export const Route = createFileRoute('/basic/experiences/')({
