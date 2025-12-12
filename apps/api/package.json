@@ -9,8 +9,10 @@
     "db:seed": "bun run src/db/seed.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.45",
     "@tropigo/types": "workspace:*",
     "@tropigo/utils": "workspace:*",
+    "ai": "^5.0.110",
     "drizzle-orm": "^0.45.0",
     "hono": "^4.10.8",
     "postgres": "^3.4.7"

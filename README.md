@@ -21,22 +21,39 @@ tropigo/
 bun install
 ```
 
-### 2. Start the database
+### 2. Setup environment variables
+
+**Copy example files:**
+```bash
+cp apps/api/.env.example apps/api/.env
+cp apps/ui/.env.example apps/ui/.env
+```
+
+**Add your API keys** to `apps/api/.env`:
+```env
+GOOGLE_GENERATIVE_AI_API_KEY=your_gemini_api_key_here
+```
+
+**Get a free Gemini API key:** https://makersuite.google.com/app/apikey
+
+> **Note:** The `.env` files are gitignored. Only `.env.example` files are committed. See [Environment Variables Guide](./wiki/deployment/environment-variables.md) for full details.
+
+### 3. Start the database
 ```bash
 docker compose up -d
 ```
 
-### 3. Push database schema (creates tables)
+### 4. Push database schema (creates tables)
 ```bash
 bun run db:push
 ```
 
-### 4. (Optional) Seed with sample data
+### 5. (Optional) Seed with sample data
 ```bash
 bun run db:seed
 ```
 
-### 5. Run both apps
+### 6. Run both apps
 
 **Option 1: Single command (recommended)**
 ```bash
@@ -129,14 +146,23 @@ export function calculateTotal(items: Item[]): number {
 }
 ```
 
-## Project Ideas to Build
+## Features
+
+### ✅ Maldy - AI Trip Planner
+
+AI-powered trip planner using Google Gemini to generate personalized Maldives itineraries.
+
+- **Route:** http://localhost:8070/maldy
+- **Features:** Budget-based planning, interest matching, real-time streaming
+- **Docs:** [Architecture Guide](./wiki/ai-integration/maldy-architecture.md) | [Troubleshooting](./wiki/ai-integration/maldy-troubleshooting.md)
+
+### Project Ideas to Build
 
 - User authentication (tourist/host login)
 - Experience listing and search
 - Booking system
 - Review and rating system
 - Community Q&A feed
-- AI trip planner (Maldy)
 - Real-time chat between tourists and hosts
 - Image/video upload for experiences
 - Payment integration

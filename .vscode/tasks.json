@@ -16,6 +16,12 @@
           "endsPattern": "Local:.*http://localhost:8070"
         }
       }
+    },
+    {
+      "label": "Stop All Dev Servers",
+      "type": "shell",
+      "command": "pkill -f 'vite|bun.*dev' || true",
+      "problemMatcher": []
     }
   ]
 }

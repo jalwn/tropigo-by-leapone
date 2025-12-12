@@ -21,7 +21,8 @@
       "webRoot": "${workspaceFolder}/apps/ui",
       "sourceMaps": true,
       "skipFiles": ["<node_internals>/**"],
-      "preLaunchTask": "Start UI Dev Server"
+      "preLaunchTask": "Start UI Dev Server",
+      "postDebugTask": "Stop All Dev Servers"
     },
     {
       "name": "Attach to Bun API",
