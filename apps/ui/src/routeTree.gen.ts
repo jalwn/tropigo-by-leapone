@@ -8,41 +8,43 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as FigmaRouteImport } from './routes/figma'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as MaldyIndexRouteImport } from './routes/maldy/index'
-import { Route as ExperiencesIndexRouteImport } from './routes/experiences/index'
+import { Route as FigmaIndexRouteImport } from './routes/figma/index'
+import { Route as BasicIndexRouteImport } from './routes/basic/index'
 import { Route as FigmaProfileRouteImport } from './routes/figma/profile'
 import { Route as FigmaMapRouteImport } from './routes/figma/map'
 import { Route as FigmaExploreRouteImport } from './routes/figma/explore'
-import { Route as ExperiencesNewRouteImport } from './routes/experiences/new'
+import { Route as FigmaLayoutRouteImport } from './routes/figma/_layout'
+import { Route as BasicAboutRouteImport } from './routes/basic/about'
+import { Route as BasicLayoutRouteImport } from './routes/basic/_layout'
+import { Route as BasicMaldyIndexRouteImport } from './routes/basic/maldy/index'
+import { Route as BasicExperiencesIndexRouteImport } from './routes/basic/experiences/index'
+import { Route as BasicExperiencesNewRouteImport } from './routes/basic/experiences/new'
+
+const FigmaRouteImport = createFileRoute('/figma')()
+const BasicRouteImport = createFileRoute('/basic')()
 
 const FigmaRoute = FigmaRouteImport.update({
   id: '/figma',
   path: '/figma',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const BasicRoute = BasicRouteImport.update({
+  id: '/basic',
+  path: '/basic',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const FigmaIndexRoute = FigmaIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => FigmaRoute,
 } as any)
-const MaldyIndexRoute = MaldyIndexRouteImport.update({
-  id: '/maldy/',
-  path: '/maldy/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExperiencesIndexRoute = ExperiencesIndexRouteImport.update({
-  id: '/experiences/',
-  path: '/experiences/',
-  getParentRoute: () => rootRouteImport,
+const BasicIndexRoute = BasicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BasicRoute,
 } as any)
 const FigmaProfileRoute = FigmaProfileRouteImport.update({
   id: '/profile',
@@ -59,89 +61,120 @@ const FigmaExploreRoute = FigmaExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => FigmaRoute,
 } as any)
-const ExperiencesNewRoute = ExperiencesNewRouteImport.update({
+const FigmaLayoutRoute = FigmaLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => FigmaRoute,
+} as any)
+const BasicAboutRoute = BasicAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => BasicRoute,
+} as any)
+const BasicLayoutRoute = BasicLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => BasicRoute,
+} as any)
+const BasicMaldyIndexRoute = BasicMaldyIndexRouteImport.update({
+  id: '/maldy/',
+  path: '/maldy/',
+  getParentRoute: () => BasicRoute,
+} as any)
+const BasicExperiencesIndexRoute = BasicExperiencesIndexRouteImport.update({
+  id: '/experiences/',
+  path: '/experiences/',
+  getParentRoute: () => BasicRoute,
+} as any)
+const BasicExperiencesNewRoute = BasicExperiencesNewRouteImport.update({
   id: '/experiences/new',
   path: '/experiences/new',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => BasicRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/figma': typeof FigmaRouteWithChildren
-  '/experiences/new': typeof ExperiencesNewRoute
+  '/basic': typeof BasicLayoutRoute
+  '/basic/about': typeof BasicAboutRoute
+  '/figma': typeof FigmaLayoutRoute
   '/figma/explore': typeof FigmaExploreRoute
   '/figma/map': typeof FigmaMapRoute
   '/figma/profile': typeof FigmaProfileRoute
-  '/experiences': typeof ExperiencesIndexRoute
-  '/maldy': typeof MaldyIndexRoute
+  '/basic/': typeof BasicIndexRoute
+  '/figma/': typeof FigmaIndexRoute
+  '/basic/experiences/new': typeof BasicExperiencesNewRoute
+  '/basic/experiences': typeof BasicExperiencesIndexRoute
+  '/basic/maldy': typeof BasicMaldyIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/figma': typeof FigmaRouteWithChildren
-  '/experiences/new': typeof ExperiencesNewRoute
+  '/basic': typeof BasicIndexRoute
+  '/basic/about': typeof BasicAboutRoute
+  '/figma': typeof FigmaIndexRoute
   '/figma/explore': typeof FigmaExploreRoute
   '/figma/map': typeof FigmaMapRoute
   '/figma/profile': typeof FigmaProfileRoute
-  '/experiences': typeof ExperiencesIndexRoute
-  '/maldy': typeof MaldyIndexRoute
+  '/basic/experiences/new': typeof BasicExperiencesNewRoute
+  '/basic/experiences': typeof BasicExperiencesIndexRoute
+  '/basic/maldy': typeof BasicMaldyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/basic': typeof BasicRouteWithChildren
+  '/basic/_layout': typeof BasicLayoutRoute
+  '/basic/about': typeof BasicAboutRoute
   '/figma': typeof FigmaRouteWithChildren
-  '/experiences/new': typeof ExperiencesNewRoute
+  '/figma/_layout': typeof FigmaLayoutRoute
   '/figma/explore': typeof FigmaExploreRoute
   '/figma/map': typeof FigmaMapRoute
   '/figma/profile': typeof FigmaProfileRoute
-  '/experiences/': typeof ExperiencesIndexRoute
-  '/maldy/': typeof MaldyIndexRoute
+  '/basic/': typeof BasicIndexRoute
+  '/figma/': typeof FigmaIndexRoute
+  '/basic/experiences/new': typeof BasicExperiencesNewRoute
+  '/basic/experiences/': typeof BasicExperiencesIndexRoute
+  '/basic/maldy/': typeof BasicMaldyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/about'
+    | '/basic'
+    | '/basic/about'
     | '/figma'
-    | '/experiences/new'
     | '/figma/explore'
     | '/figma/map'
     | '/figma/profile'
-    | '/experiences'
-    | '/maldy'
+    | '/basic/'
+    | '/figma/'
+    | '/basic/experiences/new'
+    | '/basic/experiences'
+    | '/basic/maldy'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/about'
+    | '/basic'
+    | '/basic/about'
     | '/figma'
-    | '/experiences/new'
     | '/figma/explore'
     | '/figma/map'
     | '/figma/profile'
-    | '/experiences'
-    | '/maldy'
+    | '/basic/experiences/new'
+    | '/basic/experiences'
+    | '/basic/maldy'
   id:
     | '__root__'
-    | '/'
-    | '/about'
+    | '/basic'
+    | '/basic/_layout'
+    | '/basic/about'
     | '/figma'
-    | '/experiences/new'
+    | '/figma/_layout'
     | '/figma/explore'
     | '/figma/map'
     | '/figma/profile'
-    | '/experiences/'
-    | '/maldy/'
+    | '/basic/'
+    | '/figma/'
+    | '/basic/experiences/new'
+    | '/basic/experiences/'
+    | '/basic/maldy/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  BasicRoute: typeof BasicRouteWithChildren
   FigmaRoute: typeof FigmaRouteWithChildren
-  ExperiencesNewRoute: typeof ExperiencesNewRoute
-  ExperiencesIndexRoute: typeof ExperiencesIndexRoute
-  MaldyIndexRoute: typeof MaldyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -153,33 +186,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FigmaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/basic': {
+      id: '/basic'
+      path: '/basic'
+      fullPath: '/basic'
+      preLoaderRoute: typeof BasicRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/figma/': {
+      id: '/figma/'
       path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/figma/'
+      preLoaderRoute: typeof FigmaIndexRouteImport
+      parentRoute: typeof FigmaRoute
     }
-    '/maldy/': {
-      id: '/maldy/'
-      path: '/maldy'
-      fullPath: '/maldy'
-      preLoaderRoute: typeof MaldyIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/experiences/': {
-      id: '/experiences/'
-      path: '/experiences'
-      fullPath: '/experiences'
-      preLoaderRoute: typeof ExperiencesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/basic/': {
+      id: '/basic/'
+      path: '/'
+      fullPath: '/basic/'
+      preLoaderRoute: typeof BasicIndexRouteImport
+      parentRoute: typeof BasicRoute
     }
     '/figma/profile': {
       id: '/figma/profile'
@@ -202,37 +228,92 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FigmaExploreRouteImport
       parentRoute: typeof FigmaRoute
     }
-    '/experiences/new': {
-      id: '/experiences/new'
+    '/figma/_layout': {
+      id: '/figma/_layout'
+      path: '/figma'
+      fullPath: '/figma'
+      preLoaderRoute: typeof FigmaLayoutRouteImport
+      parentRoute: typeof FigmaRoute
+    }
+    '/basic/about': {
+      id: '/basic/about'
+      path: '/about'
+      fullPath: '/basic/about'
+      preLoaderRoute: typeof BasicAboutRouteImport
+      parentRoute: typeof BasicRoute
+    }
+    '/basic/_layout': {
+      id: '/basic/_layout'
+      path: '/basic'
+      fullPath: '/basic'
+      preLoaderRoute: typeof BasicLayoutRouteImport
+      parentRoute: typeof BasicRoute
+    }
+    '/basic/maldy/': {
+      id: '/basic/maldy/'
+      path: '/maldy'
+      fullPath: '/basic/maldy'
+      preLoaderRoute: typeof BasicMaldyIndexRouteImport
+      parentRoute: typeof BasicRoute
+    }
+    '/basic/experiences/': {
+      id: '/basic/experiences/'
+      path: '/experiences'
+      fullPath: '/basic/experiences'
+      preLoaderRoute: typeof BasicExperiencesIndexRouteImport
+      parentRoute: typeof BasicRoute
+    }
+    '/basic/experiences/new': {
+      id: '/basic/experiences/new'
       path: '/experiences/new'
-      fullPath: '/experiences/new'
-      preLoaderRoute: typeof ExperiencesNewRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/basic/experiences/new'
+      preLoaderRoute: typeof BasicExperiencesNewRouteImport
+      parentRoute: typeof BasicRoute
     }
   }
 }
 
+interface BasicRouteChildren {
+  BasicLayoutRoute: typeof BasicLayoutRoute
+  BasicAboutRoute: typeof BasicAboutRoute
+  BasicIndexRoute: typeof BasicIndexRoute
+  BasicExperiencesNewRoute: typeof BasicExperiencesNewRoute
+  BasicExperiencesIndexRoute: typeof BasicExperiencesIndexRoute
+  BasicMaldyIndexRoute: typeof BasicMaldyIndexRoute
+}
+
+const BasicRouteChildren: BasicRouteChildren = {
+  BasicLayoutRoute: BasicLayoutRoute,
+  BasicAboutRoute: BasicAboutRoute,
+  BasicIndexRoute: BasicIndexRoute,
+  BasicExperiencesNewRoute: BasicExperiencesNewRoute,
+  BasicExperiencesIndexRoute: BasicExperiencesIndexRoute,
+  BasicMaldyIndexRoute: BasicMaldyIndexRoute,
+}
+
+const BasicRouteWithChildren = BasicRoute._addFileChildren(BasicRouteChildren)
+
 interface FigmaRouteChildren {
+  FigmaLayoutRoute: typeof FigmaLayoutRoute
   FigmaExploreRoute: typeof FigmaExploreRoute
   FigmaMapRoute: typeof FigmaMapRoute
   FigmaProfileRoute: typeof FigmaProfileRoute
+  FigmaIndexRoute: typeof FigmaIndexRoute
 }
 
 const FigmaRouteChildren: FigmaRouteChildren = {
+  FigmaLayoutRoute: FigmaLayoutRoute,
   FigmaExploreRoute: FigmaExploreRoute,
   FigmaMapRoute: FigmaMapRoute,
   FigmaProfileRoute: FigmaProfileRoute,
+  FigmaIndexRoute: FigmaIndexRoute,
 }
 
 const FigmaRouteWithChildren = FigmaRoute._addFileChildren(FigmaRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  BasicRoute: BasicRouteWithChildren,
   FigmaRoute: FigmaRouteWithChildren,
-  ExperiencesNewRoute: ExperiencesNewRoute,
-  ExperiencesIndexRoute: ExperiencesIndexRoute,
-  MaldyIndexRoute: MaldyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

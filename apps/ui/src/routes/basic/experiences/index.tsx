@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { experiencesQueryOptions } from '../../api/experiences'
 import { formatPrice } from '@tropigo/utils'
 
-export const Route = createFileRoute('/experiences/')({
+export const Route = createFileRoute('/basic/experiences/')({
   // Prefetch data in loader - runs BEFORE component renders
   loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(experiencesQueryOptions),

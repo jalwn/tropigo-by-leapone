@@ -4,7 +4,7 @@ import { useChat, type UIMessage } from '@ai-sdk/react'
 import { TextStreamChatTransport } from 'ai'
 import { useState } from 'react'
 
-export const Route = createFileRoute('/maldy/')({
+export const Route = createFileRoute('/basic/maldy/')({
   component: MaldyPage,
 })
 

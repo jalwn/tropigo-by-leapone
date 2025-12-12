@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/basic/')({
     component: Index,
 })
 
@@ -12,7 +12,7 @@ function Index() {
 
             <div>
                 <h2>Explore</h2>
-                <Link to="/experiences">
+                <Link to="/basic/experiences">
                     Browse All Experiences →
                 </Link>
             </div>

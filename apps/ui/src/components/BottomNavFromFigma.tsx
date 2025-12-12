@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@tanstack/react-router'
 
-export function BottomNav() {
+export function BottomNavFromFigma() {
   return (
     <div
       className="fixed bottom-0 left-0 w-full backdrop-blur-[5px] flex flex-col items-center px-12 py-2.5 h-[113px]"
@@ -23,20 +23,17 @@ function NavItem({ to, label }: { to: string; label: string }) {
   return (
     <Link
       to={to}
-      className={`flex items-center justify-center overflow-hidden px-5 py-2 rounded-2xl h-[53px] w-[73px] ${
-        active ? 'bg-[rgba(72,105,12,0.5)]' : ''
-      }`}
+      className={`flex items-center justify-center overflow-hidden px-5 py-2 rounded-2xl h-[53px] w-[73px] ${active ? 'bg-[rgba(72,105,12,0.5)]' : ''
+        }`}
     >
       <div className="flex flex-col gap-0.5 items-center justify-center">
         <div
-          className={`h-7 rounded-full w-7.5 ${
-            active ? 'bg-primary-light' : 'bg-white'
-          }`}
+          className={`h-7 rounded-full w-7.5 ${active ? 'bg-primary-light' : 'bg-white'
+            }`}
         ></div>
         <p
-          className={`font-normal text-[11px] text-center tracking-[0.06px] ${
-            active ? 'text-primary-light' : 'text-white'
-          }`}
+          className={`font-normal text-[11px] text-center tracking-[0.06px] ${active ? 'text-primary-light' : 'text-white'
+            }`}
         >
           {label}
         </p>

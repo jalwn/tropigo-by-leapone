@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { experiencesQueryOptions } from '../../api/experiences'
 
-export const Route = createFileRoute('/experiences/new')({
+export const Route = createFileRoute('/basic/experiences/new')({
   // No loader = no prefetch
   component: NewExperiencePage,
 })
