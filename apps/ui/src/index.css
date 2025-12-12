@@ -1,1 +1,25 @@
-/* index.css */
+/* TropiGo - Tailwind v4 with Design Tokens */
+@import "tailwindcss";
+
+/* Design Tokens from Figma */
+@theme {
+  /* Colors */
+  --color-primary: #c3f073;
+  --color-primary-light: #d4ff87;
+  --color-accent-blue: #73c6f0;
+  --color-heart: #f02327;
+  --color-star: #fda400;
+  --color-secondary: #515151;
+  --color-tertiary: #8f8f8f;
+  --color-gray: #8e8e93;
+  --color-gray-6: #f2f2f7;
+
+  /* Font Families */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
+  --font-logo: "Righteous", sans-serif;
+
+  /* Custom Radius */
+  --radius-xl: 20px;
+  --radius-2xl: 30px;
+  --radius-full: 60px;
+}

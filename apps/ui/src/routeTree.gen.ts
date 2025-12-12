@@ -9,12 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FigmaRouteImport } from './routes/figma'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MaldyIndexRouteImport } from './routes/maldy/index'
 import { Route as ExperiencesIndexRouteImport } from './routes/experiences/index'
+import { Route as FigmaProfileRouteImport } from './routes/figma/profile'
+import { Route as FigmaMapRouteImport } from './routes/figma/map'
+import { Route as FigmaExploreRouteImport } from './routes/figma/explore'
 import { Route as ExperiencesNewRouteImport } from './routes/experiences/new'
 
+const FigmaRoute = FigmaRouteImport.update({
+  id: '/figma',
+  path: '/figma',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -35,6 +44,21 @@ const ExperiencesIndexRoute = ExperiencesIndexRouteImport.update({
   path: '/experiences/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FigmaProfileRoute = FigmaProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => FigmaRoute,
+} as any)
+const FigmaMapRoute = FigmaMapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => FigmaRoute,
+} as any)
+const FigmaExploreRoute = FigmaExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => FigmaRoute,
+} as any)
 const ExperiencesNewRoute = ExperiencesNewRouteImport.update({
   id: '/experiences/new',
   path: '/experiences/new',
@@ -44,14 +68,22 @@ const ExperiencesNewRoute = ExperiencesNewRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/figma': typeof FigmaRouteWithChildren
   '/experiences/new': typeof ExperiencesNewRoute
+  '/figma/explore': typeof FigmaExploreRoute
+  '/figma/map': typeof FigmaMapRoute
+  '/figma/profile': typeof FigmaProfileRoute
   '/experiences': typeof ExperiencesIndexRoute
   '/maldy': typeof MaldyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/figma': typeof FigmaRouteWithChildren
   '/experiences/new': typeof ExperiencesNewRoute
+  '/figma/explore': typeof FigmaExploreRoute
+  '/figma/map': typeof FigmaMapRoute
+  '/figma/profile': typeof FigmaProfileRoute
   '/experiences': typeof ExperiencesIndexRoute
   '/maldy': typeof MaldyIndexRoute
 }
@@ -59,20 +91,46 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/figma': typeof FigmaRouteWithChildren
   '/experiences/new': typeof ExperiencesNewRoute
+  '/figma/explore': typeof FigmaExploreRoute
+  '/figma/map': typeof FigmaMapRoute
+  '/figma/profile': typeof FigmaProfileRoute
   '/experiences/': typeof ExperiencesIndexRoute
   '/maldy/': typeof MaldyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/experiences/new' | '/experiences' | '/maldy'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/figma'
+    | '/experiences/new'
+    | '/figma/explore'
+    | '/figma/map'
+    | '/figma/profile'
+    | '/experiences'
+    | '/maldy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/experiences/new' | '/experiences' | '/maldy'
+  to:
+    | '/'
+    | '/about'
+    | '/figma'
+    | '/experiences/new'
+    | '/figma/explore'
+    | '/figma/map'
+    | '/figma/profile'
+    | '/experiences'
+    | '/maldy'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/figma'
     | '/experiences/new'
+    | '/figma/explore'
+    | '/figma/map'
+    | '/figma/profile'
     | '/experiences/'
     | '/maldy/'
   fileRoutesById: FileRoutesById
@@ -80,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  FigmaRoute: typeof FigmaRouteWithChildren
   ExperiencesNewRoute: typeof ExperiencesNewRoute
   ExperiencesIndexRoute: typeof ExperiencesIndexRoute
   MaldyIndexRoute: typeof MaldyIndexRoute
@@ -87,6 +146,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/figma': {
+      id: '/figma'
+      path: '/figma'
+      fullPath: '/figma'
+      preLoaderRoute: typeof FigmaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -115,6 +181,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperiencesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/figma/profile': {
+      id: '/figma/profile'
+      path: '/profile'
+      fullPath: '/figma/profile'
+      preLoaderRoute: typeof FigmaProfileRouteImport
+      parentRoute: typeof FigmaRoute
+    }
+    '/figma/map': {
+      id: '/figma/map'
+      path: '/map'
+      fullPath: '/figma/map'
+      preLoaderRoute: typeof FigmaMapRouteImport
+      parentRoute: typeof FigmaRoute
+    }
+    '/figma/explore': {
+      id: '/figma/explore'
+      path: '/explore'
+      fullPath: '/figma/explore'
+      preLoaderRoute: typeof FigmaExploreRouteImport
+      parentRoute: typeof FigmaRoute
+    }
     '/experiences/new': {
       id: '/experiences/new'
       path: '/experiences/new'
@@ -125,9 +212,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface FigmaRouteChildren {
+  FigmaExploreRoute: typeof FigmaExploreRoute
+  FigmaMapRoute: typeof FigmaMapRoute
+  FigmaProfileRoute: typeof FigmaProfileRoute
+}
+
+const FigmaRouteChildren: FigmaRouteChildren = {
+  FigmaExploreRoute: FigmaExploreRoute,
+  FigmaMapRoute: FigmaMapRoute,
+  FigmaProfileRoute: FigmaProfileRoute,
+}
+
+const FigmaRouteWithChildren = FigmaRoute._addFileChildren(FigmaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  FigmaRoute: FigmaRouteWithChildren,
   ExperiencesNewRoute: ExperiencesNewRoute,
   ExperiencesIndexRoute: ExperiencesIndexRoute,
   MaldyIndexRoute: MaldyIndexRoute,
