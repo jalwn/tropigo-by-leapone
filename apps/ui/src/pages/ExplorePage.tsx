@@ -5,10 +5,21 @@ import { fetchExperiences } from '@/lib/api'
 import tropiLogo from '@/assets/tropi-logo.svg'
 
 const NAV_BUTTONS = [
+  { id: 'my-booking', label: 'My Bookings' },
   { id: 'bucketlist', label: 'Bucketlist' },
-  { id: 'activities', label: 'Activities' },
   { id: 'events', label: 'Events' },
+  { id: 'esim', label: 'Esim' },
+  { id: 'activities', label: 'Activities' },
   { id: 'all', label: 'All' },
+]
+
+const CATEGORIES = [
+  { id: 'all', label: 'All', emoji: '' },
+  { id: 'island', label: 'Island', emoji: '🏝️' },
+  { id: 'diving', label: 'Diving', emoji: '🤿' },
+  { id: 'boat-trip', label: 'Boat Trip', emoji: '⛵' },
+  { id: 'culture', label: 'Culture', emoji: '🎭' },
+  { id: 'water-sport', label: 'Water Sport', emoji: '🏄' },
 ]
 
 const getCategoryLabel = (category: string) => {
@@ -23,7 +34,7 @@ const getCategoryLabel = (category: string) => {
 }
 
 export default function ExplorePage() {
-  const [selectedCategory] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedNav, setSelectedNav] = useState('activities')
   const [showHeader, setShowHeader] = useState(true)
   const lastScrollY = useRef(0)
@@ -79,44 +90,28 @@ export default function ExplorePage() {
       {/* Main Content */}
       <main className="px-4 pb-5 mt-[70px] max-w-full">
       <div className="flex gap-[16px] overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          {/* {CATEGORIES.map(cat => (
+        {/* Navigation Buttons */}
+          {NAV_BUTTONS.map(btn => (
             <button
-              key={cat.id}
-              className={`flex items-center gap-1.5 px-[18px] py-2.5 border-none rounded-[20px] text-sm font-medium whitespace-nowrap cursor-pointer transition-all shadow-sm ${
-                selectedCategory === cat.id
-                  ? 'bg-[#ffeb3b] text-[#1a3a2e] font-semibold shadow-[0_2px_8px_rgba(255,235,59,0.3)]'
-                  : 'bg-white text-[#333]'
+              key={btn.id}
+              className={`flex flex-col items-center gap-1 bg-transparent border-none text-[#1a3a2e] text-[11px] font-medium cursor-pointer p-0 transition-all hover:opacity-80 ${
+                selectedNav === btn.id ? 'active' : ''
               }`}
-              onClick={() => setSelectedCategory(cat.id)}
+              onClick={() => setSelectedNav(btn.id)}
             >
-              {cat.emoji && <span className="text-base">{cat.emoji}</span>}
-              {cat.label}
-            </button>
-          ))} */}
-          {/* Navigation Buttons */}
-          {/* <div className="flex gap-5 items-start justify-center mb-2"> */}
-            {NAV_BUTTONS.map(btn => (
-              <button
-                key={btn.id}
-                className={`flex flex-col items-center gap-1 bg-transparent border-none text-[#1a3a2e] text-[11px] font-medium cursor-pointer p-0 transition-all hover:opacity-80 ${
-                  selectedNav === btn.id ? 'active' : ''
+              <span 
+                className={`w-[72px] h-[59px] rounded-full transition-all block ${
+                  selectedNav === btn.id 
+                    ? 'border-2 border-[#1a3a2e] bg-gray-200' 
+                    : 'border-2 border-transparent bg-gray-200'
                 }`}
-                onClick={() => setSelectedNav(btn.id)}
-              >
-                <span 
-                  className={`w-[72px] h-[59px] rounded-full transition-all block ${
-                    selectedNav === btn.id 
-                      ? 'border-2 border-[#1a3a2e] bg-gray-200' 
-                      : 'border-2 border-transparent bg-gray-200'
-                  }`}
-                ></span>
-                <span className="flex items-center justify-center mt-0 text-center text-[13px] font-medium">
-                  {btn.label}
-                </span>
-              </button>
-            ))}
-          {/* </div> */}
-        </div>
+              ></span>
+              <span className="flex items-center justify-center mt-0 text-center text-[11px] font-medium">
+                {btn.label}
+              </span>
+            </button>
+          ))}
+      </div>
 
         {/* Experience Section */}
         <div className="mb-5">
@@ -136,6 +131,24 @@ export default function ExplorePage() {
               />
             ))}
           </div>
+        </div>
+
+          {/* Categories */}
+      <div className="flex gap-[16px] overflow-x-auto pt-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        {CATEGORIES.map(cat => (
+            <button
+              key={cat.id}
+              className={`flex items-center gap-1.5 px-[18px] py-2.5 border-none rounded-[20px] text-sm font-medium whitespace-nowrap cursor-pointer transition-all shadow-sm ${
+                selectedCategory === cat.id
+                  ? 'bg-[#c5f274] text-[#1a3a2e] font-semibold shadow-[0_2px_8px_rgba(208,241,150,0.3)]'
+                  : 'bg-[#f2f2f7] text-[#333]'
+              }`}
+              onClick={() => setSelectedCategory(cat.id)}
+            >
+              {cat.emoji && <span className="text-base">{cat.emoji}</span>}
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         {/* Discover Section */}
