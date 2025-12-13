@@ -6,7 +6,8 @@ export const users = pgTable('users', {
   id: text('id').primaryKey(),
   email: text('email').notNull().unique(),
   name: text('name').notNull(),
-  role: text('role').notNull(), // 'tourist' | 'host' | 'admin'
+  role: text('role').notNull(), // 'tourist' | 'host' | 'admin' | 'guest'
+  isGuest: boolean('is_guest').default(false).notNull(), // Mark guest users
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
@@ -69,6 +70,17 @@ export const aiTripPlans = pgTable('ai_trip_plans', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
+// Conversations table (for Maldy AI chat)
+export const conversations = pgTable('conversations', {
+  id: text('id').primaryKey(),
+  userId: text('user_id').notNull().references(() => users.id),
+  title: text('title'), // Auto-generated from first message
+  messages: text('messages').notNull().default('[]'), // JSON array of messages
+  status: text('status').notNull().default('active'), // 'active' | 'archived'
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+})
+
 // Landmarks table
 export const landmarks = pgTable('landmarks', {
   id: text('id').primaryKey(),
@@ -111,6 +123,9 @@ export type NewReview = typeof reviews.$inferInsert
 
 export type AITripPlan = typeof aiTripPlans.$inferSelect
 export type NewAITripPlan = typeof aiTripPlans.$inferInsert
+
+export type Conversation = typeof conversations.$inferSelect
+export type NewConversation = typeof conversations.$inferInsert
 
 export type Landmark = typeof landmarks.$inferSelect
 export type NewLandmark = typeof landmarks.$inferInsert
