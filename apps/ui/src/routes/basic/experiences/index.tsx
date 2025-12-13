@@ -6,8 +6,10 @@ import { formatPrice } from '@tropigo/utils'
 
 export const Route = createFileRoute('/basic/experiences/')({
   // Prefetch data in loader - runs BEFORE component renders
-  loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(experiencesQueryOptions),
+  loader: async (opts) => {
+    const queryClient = (opts.context as any).queryClient
+    return queryClient.ensureQueryData(experiencesQueryOptions)
+  },
   component: ExperiencesPage,
 })
 

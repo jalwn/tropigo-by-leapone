@@ -24,8 +24,8 @@ services:
   # TropiGo API Service
   api:
     build:
-      context: ./apps/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./apps/api/Dockerfile
     container_name: tropigo-api
     restart: unless-stopped
     environment:
@@ -44,8 +44,8 @@ services:
   # TropiGo UI Service
   ui:
     build:
-      context: ./apps/ui
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./apps/ui/Dockerfile
     container_name: tropigo-ui
     restart: unless-stopped
     environment:
