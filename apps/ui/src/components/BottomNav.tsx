@@ -103,6 +103,17 @@ export default function BottomNav() {
         console.log('Search clicked')
     }, [])
 
+    // Check if we're on an activity page - hide BottomNav on activity pages
+    const isActivityPage = useMemo(() => 
+        currentPath.startsWith('/dev/activities/'),
+        [currentPath]
+    )
+
+    // Don't render BottomNav on activity pages
+    if (isActivityPage) {
+        return null
+    }
+
     return (
         <nav
             className="fixed inset-x-0 bottom-0 z-50 flex justify-center items-end gap-3 px-4 pb-5 pt-3 pointer-events-none bg-gradient-to-t from-[#212121] to-transparent"
