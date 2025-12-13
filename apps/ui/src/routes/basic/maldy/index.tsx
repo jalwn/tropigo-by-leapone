@@ -15,11 +15,11 @@ function MaldyPage() {
   const [interests, setInterests] = useState<string[]>([])
   const [groupSize, setGroupSize] = useState('2')
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8060'
+  const API_URL = import.meta.env.VITE_API_URL || '/api'
 
   const { messages, status, error, sendMessage } = useChat({
     transport: new TextStreamChatTransport({
-      api: `${API_URL}/api/maldy/plan`,
+      api: `${API_URL}/maldy/plan`,
     }),
   })
 

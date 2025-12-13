@@ -1,6 +1,6 @@
 // Conversation management API
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8060'
+const API_BASE = import.meta.env.VITE_API_URL || '/api'
 
 export interface Conversation {
   id: string
@@ -23,7 +23,7 @@ interface ConversationResponse {
  */
 export async function getOrCreateConversation(userId: string): Promise<Conversation> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/maldy/conversation?userId=${userId}`)
+    const response = await fetch(`${API_BASE}/maldy/conversation?userId=${userId}`)
     const data: ConversationResponse = await response.json()
 
     if (data.success && data.data) {
@@ -42,7 +42,7 @@ export async function getOrCreateConversation(userId: string): Promise<Conversat
  */
 export async function startNewConversation(userId: string): Promise<Conversation> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/maldy/conversation/new`, {
+    const response = await fetch(`${API_BASE}/maldy/conversation/new`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

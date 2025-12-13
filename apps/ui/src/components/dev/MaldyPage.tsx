@@ -5,7 +5,7 @@ import { getUserId } from '../../api/auth'
 import { getOrCreateConversation, startNewConversation } from '../../api/conversations'
 import { ActivityCard } from '../ActivityCard'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8060'
+const API_BASE = import.meta.env.VITE_API_URL || '/api'
 
 const QUICK_PROMPTS = [
     {
@@ -56,7 +56,7 @@ export default function MaldyPage() {
 
     const { messages, status, error, sendMessage } = useChat({
         transport: new TextStreamChatTransport({
-            api: `${API_BASE_URL}/api/maldy/chat`,
+            api: `${API_BASE}/maldy/chat`,
         }),
     })
 

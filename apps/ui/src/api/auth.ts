@@ -1,6 +1,6 @@
 // User authentication and management
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8060'
+const API_BASE = import.meta.env.VITE_API_URL || '/api'
 const USER_ID_KEY = 'tropigo_guest_user_id'
 
 interface GuestUserResponse {
@@ -26,7 +26,7 @@ export async function getUserId(): Promise<string> {
 
   // Create a new guest user
   try {
-    const response = await fetch(`${API_BASE_URL}/api/users/guest`, {
+    const response = await fetch(`${API_BASE}/users/guest`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
