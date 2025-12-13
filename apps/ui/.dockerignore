@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+bun.lockb
+
+# Development
+*.log
+.env.local
+.env.development
+.env.test
+.vite
+
+# Build outputs (keep dist for copying in Dockerfile)
+.turbo
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+nginx.conf
+
+# Testing
+coverage
+.nyc_output
