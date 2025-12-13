@@ -4,6 +4,7 @@ import type { ApiResponse } from '@tropigo/types'
 import { db, experiences, bookings, wishlist, reviews, users, landmarks, landmarkTranslations } from './db'
 import { eq, and, inArray, desc } from 'drizzle-orm'
 import maldy from './routes/maldy'
+import usersRouter from './routes/users'
 
 const app = new Hono()
 
@@ -12,6 +13,7 @@ app.use('/*', cors())
 
 // Mount routes
 app.route('/api/maldy', maldy)
+app.route('/api/users', usersRouter)
 
 const toRadians = (degrees: number) => degrees * (Math.PI / 180)
 
