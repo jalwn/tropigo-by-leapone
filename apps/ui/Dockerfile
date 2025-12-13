@@ -31,10 +31,11 @@ COPY --from=install /temp/prod/packages packages
 # Copy root package.json
 COPY package.json .
 
-# Build the application with API URL
-ARG VITE_API_URL=http://api:8060/api
-ENV VITE_API_URL=$VITE_API_URL
-RUN cd apps/ui && bun run build
+# Build the application with API URL (relative path for nginx proxy)
+# The VITE_ prefix makes it available to Vite during build
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=${VITE_API_URL}
+RUN cd apps/ui && VITE_API_URL=${VITE_API_URL} bun run build
 
 # ============================================================================
 # Serve with nginx
