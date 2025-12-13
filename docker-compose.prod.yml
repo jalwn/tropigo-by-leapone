@@ -46,10 +46,10 @@ services:
     build:
       context: .
       dockerfile: ./apps/ui/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://api:8060/api}
     container_name: tropigo-ui
     restart: unless-stopped
-    environment:
-      VITE_API_URL: ${VITE_API_URL:-http://localhost:8060}
     ports:
       - "8070:8070"
     depends_on:

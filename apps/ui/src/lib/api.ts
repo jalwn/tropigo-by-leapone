@@ -1,6 +1,6 @@
 import type { ApiResponse, Experience, Booking, Review, User, Landmark } from '@tropigo/types'
 
-const API_BASE = 'http://localhost:8060/api'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8060/api'
 
 export async function fetchCurrentUser(): Promise<User> {
     const response = await fetch(`${API_BASE}/user/current`)

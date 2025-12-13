@@ -31,7 +31,9 @@ COPY --from=install /temp/prod/packages packages
 # Copy root package.json
 COPY package.json .
 
-# Build the application
+# Build the application with API URL
+ARG VITE_API_URL=http://api:8060/api
+ENV VITE_API_URL=$VITE_API_URL
 RUN cd apps/ui && bun run build
 
 # ============================================================================
